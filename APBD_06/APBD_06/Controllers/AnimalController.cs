@@ -18,7 +18,7 @@ public class AnimalsController : ControllerBase
     }
 
     [HttpGet]
-    public IActionResult GetAnimals([FromQuery] string orderBy = "name")
+    public IActionResult GetAnimals([FromQuery] string orderBy)
     {
         var allowedSortFields = new List<string> { "name", "description", "category", "area" };
         if (!allowedSortFields.Contains(orderBy.ToLower()))

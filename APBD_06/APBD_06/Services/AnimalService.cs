@@ -1,10 +1,9 @@
 using APBD_06.Models;
 using System.Data.SqlClient;
-using System.Collections.Generic;
 
 namespace APBD_06.Services
 {
-    public class AnimalService
+    public class AnimalService : IAnimalService
     {
         private readonly string _connectionString;
         private readonly List<string> _allowedSortFields = new List<string> { "name", "description", "category", "area" };
@@ -17,6 +16,11 @@ namespace APBD_06.Services
         public bool IsValidOrderBy(string orderBy)
         {
             return _allowedSortFields.Contains(orderBy.ToLower());
+        }
+        
+        public List<string> GetAllowedSortFields()
+        {
+            return _allowedSortFields;
         }
         
         public List<Animal> GetAnimals(string orderBy)

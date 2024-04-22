@@ -8,9 +8,9 @@ namespace APBD_06.Controllers;
 [ApiController]
 public class AnimalsController : ControllerBase
 {
-    private readonly AnimalService _animalService;
+    private readonly IAnimalService _animalService;
 
-    public AnimalsController(AnimalService animalService)
+    public AnimalsController(IAnimalService animalService)
     {
         _animalService = animalService;
     }
@@ -20,12 +20,13 @@ public class AnimalsController : ControllerBase
     {
         if (!_animalService.IsValidOrderBy(orderBy))
         {
-            return BadRequest($"Niepoprawna nazwa kolumny. Dozwolone nazwy: {string.Join(", ", _animalService._allowedSortFields)}.");
+            return BadRequest($"Niepoprawna nazwa kolumny. Dozwolone nazwy: {string.Join(", ", _animalService.GetAllowedSortFields())}.");
         }
 
         var animals = _animalService.GetAnimals(orderBy);
         return Ok(animals);
     }
+
     
     [HttpPost]
     public IActionResult AddAnimal(Animal animal)

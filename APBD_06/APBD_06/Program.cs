@@ -1,4 +1,3 @@
-using System.Data.SqlClient;
 
 var builder = WebApplication.CreateBuilder(args);
 
